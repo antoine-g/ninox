@@ -1,2 +1,5 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1><%= @user.email %></h1>
+<dl class="dl-horizontal">
+  <dt>Sinup date</dt>
+  <dd><%= @user.created_at %></dd>
+</dl>
