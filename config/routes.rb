@@ -1,4 +1,10 @@
 Ninox::Application.routes.draw do
+  resources :users
+
+  get "users/update"
+
+  get "users/destroy"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
