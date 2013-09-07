@@ -42,4 +42,18 @@ describe UsersController do
       response.should have_selector(:title => "#{@app_name} | #{@title}")
     end
   end
+
+  describe "POST 'create'" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    describe "with invalid params" do
+      it "invalid email should redirect to 'users/new'" do
+        invalid_email_user = FactoryGirl.create(:user, :email => "invalidemail")
+        post :create, :params => invalid_email_user
+        response.should redirect_to :action => "new"
+      end
+    end
+  end
 end
