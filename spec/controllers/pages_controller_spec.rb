@@ -19,6 +19,18 @@ describe PagesController do
     it "should have the right title" do
       response.should have_selector("title", :content => "#{@app_name} | Home")
     end
+
+    it "should contain header navbar" do
+      response.should have_selector("div", :class => "navbar")
+    end
+
+    it "should contain welcome partial" do
+      response.should have_selector("div", :class => "hero-unit")
+    end
+
+    it "should contain footer" do
+      response.should have_selector("div", :class => "footer")
+    end
   end
 
   describe "GET 'about'" do
