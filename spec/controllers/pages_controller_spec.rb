@@ -3,10 +3,6 @@ require 'spec_helper'
 describe PagesController do
   render_views
 
-  before(:each) do
-    @base_title = "Ninox | "
-  end
-
   it "GET on '/' should route to GET 'home'" do
     { :get => "/" }.should route_to(:controller => "pages", :action => "home")
   end
@@ -21,7 +17,7 @@ describe PagesController do
     end
 
     it "should have the right title" do
-      response.should have_selector("title", :content => @base_title + "Home")
+      response.should have_selector("title", :content => "#{@app_name} | Home")
     end
   end
 
@@ -35,7 +31,7 @@ describe PagesController do
     end
 
     it "should have the right title" do
-      response.should have_selector("title", :content => @base_title + "About")
+      response.should have_selector("title", :content => "#{@app_name} | About")
     end
   end
 
