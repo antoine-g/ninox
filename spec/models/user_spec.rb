@@ -116,4 +116,15 @@ describe User do
       matching_user.should == @user
     end
   end
+
+  describe "admin attribute:" do
+      it "should not be admin by default" do
+      @user.should_not be_admin
+    end
+
+    it "should be able to become admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
+  end
 end
