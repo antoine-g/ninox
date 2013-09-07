@@ -18,31 +18,36 @@ describe User do
     @user.should respond_to(:password)
   end
 
-  # email validations
-  it "should require an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
-  end
+  describe "email validation" do
+    it "should require an email address" do
+      no_email_user = User.new(@attr.merge(:email => ""))
+      no_email_user.should_not be_valid
+    end
 
-  it "should refuse invalid email addresses" do
-    adresses = %w[user@foo,com user_at_foo.org example.user@foo.]
-    adresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
+    it "should refuse invalid email addresses" do
+      adresses = %w[user@foo,com user_at_foo.org example.user@foo.]
+      adresses.each do |address|
+        invalid_email_user = User.new(@attr.merge(:email => address))
+        invalid_email_user.should_not be_valid
+      end
+    end
+
+    it "should accept valid email addresses" do
+      adresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
+      adresses.each do |address|
+        valid_email_user = User.new(@attr.merge(:email => address))
+        valid_email_user.should be_valid
+      end
+    end
+
+    it "should reject an existing email" do
+      User.create!(@attr)
+      user_with_duplicate_email = User.new(@attr)
+      user_with_duplicate_email.should_not be_valid
     end
   end
 
-  it "should accept valid email addresses" do
-    adresses = %w[user@foo.com THE_USER@foo.bar.org first.last@foo.jp]
-    adresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
-    end
-  end
-
-  # TODO test user uniqueness
-
-  describe "password validations:" do
+  describe "password validation" do
     it "should require a password" do
       no_password_user = User.new(@attr.merge(:password => ""))
       no_password_user.should_not be_valid
