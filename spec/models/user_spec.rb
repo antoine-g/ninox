@@ -65,4 +65,29 @@ describe User do
       User.new(hash).should_not be_valid
     end
   end
+
+  describe "password hashing" do
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should have a password_hash attribute" do
+      @user.should respond_to(:password_hash)
+    end
+  
+    it "should force presence of password_hash" do
+      @user.password_hash.should_not be_blank
+    end
+    
+    describe "has_password? method" do
+
+      it "should return true if password match hash" do
+        @user.has_password?(@attr[:password]).should be_true
+      end
+      
+      it "should return false if password doesn't match hash" do
+        @user.has_password?("invalid").should be_false
+      end
+    end
+  end
 end
