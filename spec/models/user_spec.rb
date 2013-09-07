@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe User do
   before :each do
-    @attr = { :email => "user@example.com" }
+    @attr = { :email => "user@example.com", :password => "password", :password_confirmation => "password" }
     @user = User.new(@attr)
   end
 
@@ -42,11 +42,27 @@ describe User do
 
   # TODO test user uniqueness
 
-  it "password validations:" do
+  describe "password validations:" do
     it "should require a password" do
       no_password_user = User.new(@attr.merge(:password => ""))
       no_password_user.should_not be_valid
     end
 
-    
+    it "should require a valid password_confirmation" do
+      User.new(@attr.merge(:password_confirmation => "invalid")).
+      should_not be_valid
+    end
+
+    it "should reject too short password" do
+      short = "a" * 5
+      hash = @attr.merge(:password => short, :password_confirmation => short)
+      User.new(hash).should_not be_valid
+    end
+
+    it "should reject too long password" do
+      long = "a" * 41
+      hash = @attr.merge(:password => long, :password_confirmation => long)
+      User.new(hash).should_not be_valid
+    end
+  end
 end
