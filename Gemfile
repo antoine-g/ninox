@@ -26,6 +26,7 @@ end
 
 group :test do
   gem "rspec", "~> 2.14.1"
+  gem "webrat", "~> 0.7.3"
 end
 
 gem 'jquery-rails'
