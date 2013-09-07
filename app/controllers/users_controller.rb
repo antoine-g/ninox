@@ -10,14 +10,14 @@ class UsersController < ApplicationController
 
   def new
     @user  = User.new
-    @title = "Signup"
+    @title = "Sign up"
   end
 
   def create
     @user = User.new(params[:user])
     if @user.save
       # TODO signin
-      flash[:success] = "Bienvenue dans l'Application Exemple!"
+      flash[:success] = "Welcome to Ninox!"
       redirect_to user_path(@user)
     else
       @titre = "Inscription"

@@ -39,7 +39,7 @@ describe UsersController do
 
     it "should have the right title" do
       get 'new'
-      response.should have_selector(:title => "#{@app_name} | #{title}")
+      response.should have_selector(:title => "#{@app_name} | #{@title}")
     end
   end
 end

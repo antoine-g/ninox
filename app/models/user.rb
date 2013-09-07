@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   private
     def hash_password
       self.salt = make_salt if new_record?
-      self.password_hash = hash(password)
+      self.password_hash = hash(self.password)
     end
 
     def hash(string)
