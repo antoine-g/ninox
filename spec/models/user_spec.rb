@@ -41,4 +41,12 @@ describe User do
   end
 
   # TODO test user uniqueness
+
+  it "password validations:" do
+    it "should require a password" do
+      no_password_user = User.new(@attr.merge(:password => ""))
+      no_password_user.should_not be_valid
+    end
+
+    
 end

@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
                     :uniqueness =>  { :case_sensitive => false },
                     :format => { :with => email_regex }
 
+  validates :password, :presence => true,
+                        :confirmation => true,
+                        :length => { :within => 6..40 }
+
 end
