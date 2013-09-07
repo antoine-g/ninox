@@ -1,0 +1,13 @@
+== Ninox
+
+Ninox is a rails application which aims to create a file exchange platform for students.
+Students are often sharing files and documents they have created for their courses and these can be usefull to the others.
+
+This project is only in pre-alpha and not usable at the moment.
+Please join if you're interested in it, any help or idea is welcome !
+
+== License
+
+This project is distributed under the WTF License 3.0 (see http://wtflicense.com)
+
+"Do whatever the f*** you want with the content, EXCEPT claim it as your own work or make a profit."
