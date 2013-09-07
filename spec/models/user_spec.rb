@@ -95,4 +95,25 @@ describe User do
       end
     end
   end
+
+  describe "authenticate method" do
+    before(:each) do
+      @user = User.create!(@attr)
+    end
+
+    it "should return nil if email/password don't match" do
+      wrong_password_user = User.authenticate(@attr[:email], "wrongpass")
+      wrong_password_user.should be_nil
+    end
+
+    it "should return nil if email doesn't match any user" do
+      nonexistent_user = User.authenticate("bar@foo.com", @attr[:password])
+      nonexistent_user.should be_nil
+    end
+
+    it "should return user if email/password match" do
+      matching_user = User.authenticate(@attr[:email], @attr[:password])
+      matching_user.should == @user
+    end
+  end
 end

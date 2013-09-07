@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
     password_hash == hash(submitted_password)
   end
 
+  def self.authenticate(email, submitted_password)
+      user = find_by_email(email)
+      return nil  if user.nil?
+      return user if user.has_password?(submitted_password)
+  end
+  
   private
     def hash_password
       self.salt = make_salt if new_record?
