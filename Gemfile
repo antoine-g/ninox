@@ -20,6 +20,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+group :developpement do
+  gem "rspec-rails", "~> 2.14.0"
+end
+
+group :test do
+  gem "rspec", "~> 2.14.1"
+end
+
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
