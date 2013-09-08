@@ -132,7 +132,7 @@ describe UsersController do
         @attr = { :email => "user@example.org", :password => "newpassword", :password_confirmation => "newpassword" }
       end
 
-      it "should alter user caracteristics" do
+      it "should alter user characteristics" do
         put :update, :id => @user, :user => @attr
         @user.reload
         @user.email.should == @attr[:email]
@@ -147,6 +147,28 @@ describe UsersController do
         put :update, :id => @user, :user => @attr
         flash[:success].should =~ /Profile updated/
       end
+    end
+  end
+
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it "should destroy 1 user" do
+      lambda do
+        delete :destroy, :id => @user
+      end.should change(User, :count).by(-1)
+    end
+
+    it "should redirect to users index" do
+      delete :destroy, :id => @user
+      response.should redirect_to(users_path)
+    end
+
+    it "should display a flash message'" do
+      delete :destroy, :id => @user
+      flash[:success].should =~ /Profile deleted/i
     end
   end
 end

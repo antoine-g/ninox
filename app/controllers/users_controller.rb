@@ -44,6 +44,7 @@ class UsersController < ApplicationController
 
   def destroy
     User.find(params[:id]).destroy
+    flash[:success] = "Profile deleted"
     redirect_to users_path
     # TODO : reserved to admin and self deletion
   end
