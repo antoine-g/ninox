@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def index
     @title = "List of users"
+    @users = User.order(:email).page(params[:page])
   end
 
   def show
