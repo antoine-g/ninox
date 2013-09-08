@@ -24,7 +24,7 @@ describe CoursesController do
     end
 
     it "should have 1 element for each user" do
-      get index
+      get :index
       @courses.each do |course|
         response.should have_selector("td", :content => course.code)
       end
@@ -67,6 +67,63 @@ describe CoursesController do
 
     it "should have the right title" do
       get 'new'
+      response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+    end
+  end
+
+  describe "POST 'create'" do
+    describe "with invalid params" do
+      before(:each) do
+        @attr = { :code => "", :name => "" }
+      end
+
+      it "invalid code should render template 'new'" do
+        post :create, :course => @attr
+        response.should render_template('new')
+      end
+
+      it "should not change course count" do
+        lambda do
+          post :create, :course => @attr
+        end.should_not change(Course, :count)
+      end
+
+      it "should have the right title" do
+        post :create, :course => @attr
+        response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+      end
+    end
+
+    describe "with valid params" do
+      before(:each) do
+        @attr = { :code => "ZZ99", :name => "Test" }
+      end
+
+      it "should create 1 course" do
+        lambda do
+          post :create, :course => @attr
+        end.should change(Course, :count).by(1)
+      end
+
+      it "should redirect to the course page" do
+        post :create, :course => @attr
+        response.should redirect_to(course_path(assigns(:course)))
+      end
+    end
+  end
+
+  describe "GET 'edit'" do
+    before(:each) do
+      @course = FactoryGirl.create(:course)
+    end
+
+    it "should return http success" do
+      get :edit, :id => @course
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit, :id => @course
       response.should have_selector("title", :content => "#{@app_name} | #{@title}")
     end
   end

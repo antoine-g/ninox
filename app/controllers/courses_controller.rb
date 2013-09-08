@@ -18,7 +18,7 @@ class CoursesController < ApplicationController
     @course = Course.new(params[:course])
     if @course.save
       flash[:success] = "Course created"
-      redirect_to courses_path
+      redirect_to course_path(@course)
     else
       @title = "New course"
       render 'new'
@@ -32,7 +32,7 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    if @user.update_attributes(params[:user])
+    if @course.update_attributes(params[:user])
       flash[:success] = "Course updated"
       redirect_to @course
     else
