@@ -127,4 +127,70 @@ describe CoursesController do
       response.should have_selector("title", :content => "#{@app_name} | #{@title}")
     end
   end
+
+  describe "PUT 'update'" do
+    before(:each) do
+      @course = FactoryGirl.create(:course)
+    end
+
+    describe "with invalid params" do
+      before(:each) do
+        @attr = { :code => "", :name => "" }
+      end
+
+      it "should render 'edit'" do
+        put :update, :id => @course, :course => @attr
+        response.should render_template('edit')
+      end
+
+      it "should have the right title" do
+        put :update, :id => @course, :course => @attr
+        response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+      end
+    end
+
+    describe "with valid params" do
+      before(:each) do
+        @attr = { :code => "ZZ99", :name => "Test" }
+      end
+
+      it "should alter course characteristics" do
+        put :update, :id => @course, :course => @attr
+        @course.reload
+        @course.code.should == @attr[:code]
+      end
+
+      it "should redirect to the course page" do
+        put :update, :id => @course, :course => @attr
+        response.should redirect_to(course_path(@course))
+      end
+
+      it "should display a flash message" do
+        put :update, :id => @course, :course => @attr
+        flash[:success].should =~ /Course updated/
+      end
+    end
+  end
+
+  describe "DELETE 'destroy'" do
+    before(:each) do
+      @course = FactoryGirl.create(:course)
+    end
+
+    it "should destroy 1 course" do
+      lambda do
+        delete :destroy, :id => @course
+      end.should change(Course, :count).by(-1)
+    end
+
+    it "should redirect to courses index" do
+      delete :destroy, :id => @course
+      response.should redirect_to(courses_path)
+    end
+
+    it "should display a flash message'" do
+      delete :destroy, :id => @course
+      flash[:success].should =~ /Course deleted/i
+    end
+  end
 end
