@@ -1,11 +1,9 @@
 Ninox::Application.routes.draw do
+  resources :documents
+
   resources :courses
 
   resources :users
-
-  get "users/update"
-
-  get "users/destroy"
 
   get "pages/home"
 
