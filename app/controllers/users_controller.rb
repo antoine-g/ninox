@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to Ninox!"
       redirect_to user_path(@user)
     else
-      @titre = "Inscription"
+      @title = "Sign up"
       render 'new'
     end
   end

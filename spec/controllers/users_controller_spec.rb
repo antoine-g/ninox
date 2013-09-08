@@ -44,15 +44,48 @@ describe UsersController do
   end
 
   describe "POST 'create'" do
-    before(:each) do
-      @user = FactoryGirl.create(:user)
-    end
 
     describe "with invalid params" do
-      it "invalid email should redirect to 'users/new'" do
-        invalid_email_user = FactoryGirl.create(:user, :email => "invalidemail")
-        post :create, :params => invalid_email_user
-        response.should redirect_to :action => "new"
+      before(:each) do
+        @attr = { :email => "", :password => "", :password_confirmation => "" }
+      end
+
+      it "invalid email should render template 'new'" do
+        post :create, :user => @attr
+        response.should render_template('new')
+      end
+
+      it "should not change user count" do
+        lambda do
+          post :create, :user => @attr
+        end.should_not change(User, :count)
+      end
+
+      it "should have the right title" do
+        post :create, :user => @attr
+        response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+      end
+    end
+
+    describe "with valid params" do
+      before(:each) do
+        @attr = { :email => "user@example.com", :password => "foobar", :password_confirmation => "foobar" }
+      end
+
+      it "should create 1 user" do
+        lambda do
+          post :create, :user => @attr
+        end.should change(User, :count).by(1)
+      end
+
+      it "should redirect to the user page" do
+        post :create, :user => @attr
+        response.should redirect_to(user_path(assigns(:user)))
+      end
+      
+      it "should display a welcome message" do
+        post :create, :user => @attr
+        flash[:success].should =~ /Welcome to Ninox!/i
       end
     end
   end
