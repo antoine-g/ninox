@@ -3,7 +3,7 @@
       <%= link_to @app_name, root_path, :class => "brand" %>
       <ul class="nav">
         <li><%= link_to "Home", { :controller => "pages", :action => "home" } %></li>
-        <li><a href="#">Courses</a></li>
+        <li><%= link_to "Courses", courses_path %></li>
         <li><a href="#">Most downloaded</a></li>
       </ul>
       <form class="navbar-form pull-right">

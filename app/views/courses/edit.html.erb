@@ -1,0 +1,9 @@
+<h1>Edit course</h1>
+
+<%= form_for(@course) do |f| %>
+<%= render 'fields', :f => f %>
+  <div class="actions">
+    <%= f.submit "Apply" %>
+  </div>
+<% end %>
+<%= button_to "Delete course", @course, :method => :delete %>

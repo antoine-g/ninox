@@ -1,0 +1,12 @@
+<h1>All courses</h1>
+
+<%= paginate @courses %>
+
+<table class="courses">
+  <tr>
+    <th>Code</th><th>Name</th>
+  </tr>
+  <%= render @courses %>
+</table>
+
+<%= paginate @courses %>
