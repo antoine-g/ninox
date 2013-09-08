@@ -11,6 +11,10 @@ describe CoursesController do
   end
 
   describe "GET 'show'" do
+    before(:each) do
+      @course = FactoryGirl.create(:course)
+    end
+
     it "should return http success" do
       get 'show', :id => @course
       response.should be_success

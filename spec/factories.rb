@@ -6,11 +6,18 @@ FactoryGirl.define do
     password              "password"
     password_confirmation "password"
   end
-end
 
-# to easily generate email sequences
-FactoryGirl.define do
   sequence :email do |n|
     "person#{n}@example.com"
+  end
+
+  factory :course do
+    name "Course name"
+    code "AA01"
+  end
+
+  sequence :code do |n|
+    "BB0#{n}" if n <10
+    "BB#{n}" if 9 < n 100
   end
 end
