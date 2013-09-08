@@ -1,24 +1,24 @@
 class DocumentsController < ApplicationController
   def index
     @title = "List of documents"
-    @docs  = Document.order(:title).page(params[:page])
+    @documents  = Document.order(:title).page(params[:page])
   end
 
   def show
-    @doc   = Document.find(params[:id])
-    @title = @doc.title
+    @document   = Document.find(params[:id])
+    @title = @document.title
   end
 
   def new
-    @doc   = Document.new
+    @document   = Document.new
     @title = "New document"
   end
 
   def create
-    @doc = Document.new(params[:doc])
-    if @doc.save
+    @document = Document.new(params[:document])
+    if @document.save
       flash[:success] = "Document created"
-      redirect_to document_path(@doc)
+      redirect_to document_path(@document)
     else
       @title = "New document"
       render 'new'
@@ -26,15 +26,15 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-    @doc   = Document.find(params[:id])
+    @document   = Document.find(params[:id])
     @title = "Edit document"
   end
 
   def update
-    @doc = Document.find(params[:id])
-    if @doc.update_attributes(params[:user])
+    @document = Document.find(params[:id])
+    if @document.update_attributes(params[:document])
       flash[:success] = "Document updated"
-      redirect_to @doc
+      redirect_to @document
     else
       @title = "Edit document"
       render 'edit'
@@ -42,5 +42,8 @@ class DocumentsController < ApplicationController
   end
 
   def destroy
+    Document.find(params[:id]).destroy
+    flash[:success] = "Document deleted"
+    redirect_to documents_path
   end
 end

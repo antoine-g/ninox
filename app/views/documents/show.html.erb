@@ -1,2 +1,7 @@
-<h1>Documents#show</h1>
-<p>Find me in app/views/documents/show.html.erb</p>
+<h1><%= @document.title %></h1>
+<dl class="dl-horizontal">
+  <dt>Title</dt>
+  <dd><%= @document.title %></dd>
+  <dt>Description</dt>
+  <dd><%= @document.desc %></dd>
+</dl>
