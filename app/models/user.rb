@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   before_save :hash_password
 
   def has_password?(submitted_password)
-    password_hash == hash(submitted_password)
+    password_hash == make_hash(submitted_password)
   end
 
   def self.authenticate(email, submitted_password)
@@ -27,10 +27,10 @@ class User < ActiveRecord::Base
   private
     def hash_password
       self.salt = make_salt if new_record?
-      self.password_hash = hash(self.password)
+      self.password_hash = make_hash(password)
     end
 
-    def hash(string)
+    def make_hash(string)
       secure_hash("#{salt}--#{string}")
     end
 
