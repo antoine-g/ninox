@@ -1,0 +1,12 @@
+<h1>All users</h1>
+
+<%= paginate @users %>
+
+<table class="users">
+  <tr>
+    <th>Email</th><th>Sign up date</th>
+  </tr>
+  <%= render @users %>
+</table>
+
+<%= paginate @users %>
