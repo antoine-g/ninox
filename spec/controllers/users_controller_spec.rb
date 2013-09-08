@@ -171,4 +171,41 @@ describe UsersController do
       flash[:success].should =~ /Profile deleted/i
     end
   end
+
+  describe "GET 'index'" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+      second = FactoryGirl.create(:user, :email => "another@example.com")
+      third  = FactoryGirl.create(:user, :email => "another@example.net")
+
+      @users = [@user, second, third]
+      30.times do
+        @users << FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
+      end
+    end
+
+    it "should return http success" do
+      get :index
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :index
+      response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+    end
+
+    it "should have 1 element for each user" do
+      get :index
+      @users.each do |user|
+        response.should have_selector("td", :content => user.email)
+      end
+    end
+    
+    it "should paginate users" do
+      get :index
+      response.should have_selector("nav.pagination")
+      response.should have_selector("a", :href => "/users?page=2", :content => "2")
+      response.should have_selector("a", :href => "/users?page=2", :content => "Next ")
+    end
+  end
 end
