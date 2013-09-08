@@ -2,4 +2,7 @@
 
 <%= form_for(@user) do |f| %>
 <%= render 'fields', :f => f %>
+  <div class="actions">
+    <%= f.submit "Apply" %>
+  </div>
 <% end %>

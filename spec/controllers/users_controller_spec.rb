@@ -89,4 +89,64 @@ describe UsersController do
       end
     end
   end
+
+  describe "GET 'edit'" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    it "should return http success" do
+      get :edit, :id => @user
+      response.should be_success
+    end
+
+    it "should have the right title" do
+      get :edit, :id => @user
+      response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+    end
+  end
+
+  describe "PUT 'update'" do
+    before(:each) do
+      @user = FactoryGirl.create(:user)
+    end
+
+    describe "with invalid params" do
+      before(:each) do
+        @attr = { :email => "", :password => "", :password_confirmation => "" }
+      end
+
+      it "should render 'edit'" do
+        put :update, :id => @user, :user => @attr
+        response.should render_template('edit')
+      end
+
+      it "should have the right title" do
+        put :update, :id => @user, :user => @attr
+        response.should have_selector("title", :content => "#{@app_name} | #{@title}")
+      end
+    end
+
+    describe "with valid params" do
+      before(:each) do
+        @attr = { :email => "user@example.org", :password => "newpassword", :password_confirmation => "newpassword" }
+      end
+
+      it "should alter user caracteristics" do
+        put :update, :id => @user, :user => @attr
+        @user.reload
+        @user.email.should == @attr[:email]
+      end
+
+      it "should redirect to the user page" do
+        put :update, :id => @user, :user => @attr
+        response.should redirect_to(user_path(@user))
+      end
+
+      it "should display a flash message" do
+        put :update, :id => @user, :user => @attr
+        flash[:success].should =~ /Profile updated/
+      end
+    end
+  end
 end
