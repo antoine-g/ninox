@@ -1,2 +1,12 @@
-<h1>Courses#index</h1>
-<p>Find me in app/views/courses/index.html.erb</p>
+<h1>All courses</h1>
+
+<%= paginate @courses %>
+
+<table class="courses">
+  <tr>
+    <th>Code</th><th>Name</th>
+  </tr>
+  <%= render @courses %>
+</table>
+
+<%= paginate @courses %>

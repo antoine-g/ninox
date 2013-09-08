@@ -1,6 +1,7 @@
 class CoursesController < ApplicationController
   def index
     @title = "List of courses"
+    @courses = Course.order(:code).page(params[:page])
   end
 
   def show

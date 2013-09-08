@@ -1,2 +1,7 @@
-<h1>Courses#show</h1>
-<p>Find me in app/views/courses/show.html.erb</p>
+<h1><%= @course.code %></h1>
+<dl class="dl-horizontal">
+  <dt>Name</dt>
+  <dd><%= @course.name %></dd>
+  <dt>Created at</dt>
+  <dd><%= @course.created_at %></dd>
+</dl>

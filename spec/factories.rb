@@ -17,7 +17,10 @@ FactoryGirl.define do
   end
 
   sequence :code do |n|
-    "BB0#{n}" if n <10
-    "BB#{n}" if 9 < n 100
+    if n < 10
+      "BB0" + n.to_s
+    else
+      "BB#{n}"
+    end
   end
 end
