@@ -16,7 +16,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(params[:document])
-    if @document.save
+    if course_exists?(@document.course_id) && @document.save
       flash[:success] = "Document created"
       redirect_to document_path(@document)
     else
@@ -32,7 +32,7 @@ class DocumentsController < ApplicationController
 
   def update
     @document = Document.find(params[:id])
-    if @document.update_attributes(params[:document])
+    if course_exists?(@document.course_id) && @document.update_attributes(params[:document])
       flash[:success] = "Document updated"
       redirect_to @document
     else
@@ -46,4 +46,10 @@ class DocumentsController < ApplicationController
     flash[:success] = "Document deleted"
     redirect_to documents_path
   end
+
+  private
+    def course_exists?(course_id)
+      not Course.find_by_id(course_id).nil?
+      course_id.nil?
+    end
 end

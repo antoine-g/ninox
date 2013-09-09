@@ -4,4 +4,10 @@
   <dd><%= @document.title %></dd>
   <dt>Description</dt>
   <dd><%= @document.desc %></dd>
+<% if @document.course %>
+  <dt>Associated to course</dt>
+  <dd><%= link_to @document.course.code, @document.course %></dd>
+<% else %>
+  <dt>Not associated to any course</dt>
+<% end %>
 </dl>

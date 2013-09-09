@@ -5,4 +5,9 @@
   <td>
     <%= document.desc %>
   </td>
+  <td>
+    <% if document.course %>
+    <%= link_to document.course.code, course_path(document.course) %>
+    <% end %>
+  </td>
 </tr>
