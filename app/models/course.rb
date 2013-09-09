@@ -1,5 +1,6 @@
 class Course < ActiveRecord::Base
   attr_accessible :code, :name
+  has_many :documents
 
   code_regex = /\A[a-z]{2}\d{2}\z/i
 
