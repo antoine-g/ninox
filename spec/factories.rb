@@ -23,4 +23,9 @@ FactoryGirl.define do
       "BB#{n}"
     end
   end
+
+  factory :document do
+    title "Document title"
+    desc "Description of the document"
+  end
 end

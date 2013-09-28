@@ -1,0 +1,9 @@
+<h1>Edit document</h1>
+
+<%= form_for(@document) do |f| %>
+<%= render 'fields', :f => f %>
+  <div class="actions">
+    <%= f.submit "Apply" %>
+  </div>
+<% end %>
+<%= button_to "Delete document", @document, :method => :delete %>

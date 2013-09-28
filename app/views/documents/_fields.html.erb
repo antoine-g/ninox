@@ -1,0 +1,25 @@
+<%= render 'shared/error_messages', :object => f.object %>
+<div class="field">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div class="field">
+  <%= f.label :desc, "Description" %>
+  <%= f.text_field :desc %>
+</div>
+<div class="field">
+  <%= f.label :course_id, "Course" %>
+  <%= courses_selection = [["None", nil]]
+    Course.all.each do |course|
+      courses_selection << [course.code, course.id]
+    end
+  select(:document, :course_id, courses_selection) %>
+</div>
+<div class="field">
+  <%= f.label :user_id, "Owner" %>
+  <%= users_selection = [["None", nil]]
+    User.all.each do |user|
+      users_selection << [user.email, user.id]
+    end
+  select(:document, :user_id, users_selection) %>
+</div>

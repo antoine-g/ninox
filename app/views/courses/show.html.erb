@@ -5,3 +5,13 @@
   <dt>Created at</dt>
   <dd><%= @course.created_at %></dd>
 </dl>
+<table>
+  <tr><th>Title</th><th>Desc</th><th>Created at</th></tr>
+<% @course.documents.each do |document| %>
+  <tr>
+    <td><%= link_to document.title, document %></td>
+    <td><%= document.desc %></td>
+    <td><%= document.created_at %></td>
+  </tr>
+<% end %>
+</table>
