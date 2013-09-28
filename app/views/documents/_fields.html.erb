@@ -15,3 +15,11 @@
     end
   select(:document, :course_id, courses_selection) %>
 </div>
+<div class="field">
+  <%= f.label :user_id, "Owner" %>
+  <%= users_selection = [["None", nil]]
+    User.all.each do |user|
+      users_selection << [user.email, user.id]
+    end
+  select(:document, :user_id, users_selection) %>
+</div>

@@ -10,4 +10,9 @@
     <%= link_to document.course.code, course_path(document.course) %>
     <% end %>
   </td>
+  <td>
+    <% if document.user %>
+    <%= link_to document.user.email, user_path(document.user) %>
+    <% end %>
+  </td>
 </tr>

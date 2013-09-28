@@ -10,4 +10,10 @@
 <% else %>
   <dt>Not associated to any course</dt>
 <% end %>
+<% if @document.user %>
+  <dt>Owner</dt>
+  <dd><%= link_to @document.user.email, @document.user %></dd>
+<% else %>
+  <dt>Not associated to any user</dt>
+<% end %>
 </dl>

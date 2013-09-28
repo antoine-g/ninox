@@ -32,10 +32,12 @@ class DocumentsController < ApplicationController
 
   def update
     @document = Document.find(params[:id])
+    print "@@@ #{course_exists?(@document.course_id)}@@@"
     if course_exists?(@document.course_id) && @document.update_attributes(params[:document])
       flash[:success] = "Document updated"
-      redirect_to @document
+      redirect_to document_path(@document)
     else
+      print "@@@ coucou @@@"
       @title = "Edit document"
       render 'edit'
     end
@@ -49,7 +51,6 @@ class DocumentsController < ApplicationController
 
   private
     def course_exists?(course_id)
-      not Course.find_by_id(course_id).nil?
-      course_id.nil?
+      (not Course.find_by_id(course_id).nil?) or course_id.nil?
     end
 end
