@@ -1,6 +1,6 @@
 <h1>Edit document</h1>
 
-<%= form_for(@document) do |f| %>
+<%= form_for @document, :url => documents_path, :html => { :multipart => true } do |f| %>
 <%= render 'fields', :f => f %>
   <div class="actions">
     <%= f.submit "Apply" %>
