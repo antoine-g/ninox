@@ -6,9 +6,9 @@ class Course < ActiveRecord::Base
 
   before_validation :format_code
 
-  validates :code, :presence => true,
-                    :uniqueness =>  { :case_sensitive => false },
-                    :format => { :with => code_regex }
+  validates :code,  presence: true,
+                    uniqueness:  { case_sensitive: false },
+                    format: { with: code_regex }
 
   def format_code
     code.upcase! if code

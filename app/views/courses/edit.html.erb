@@ -1,9 +1,9 @@
 <h1>Edit course</h1>
 
 <%= form_for(@course) do |f| %>
-<%= render 'fields', :f => f %>
+<%= render 'fields', f: f %>
   <div class="actions">
-    <%= f.submit "Apply" %>
+    <%= f.submit "Apply", class: "btn btn-primary" %>
   </div>
 <% end %>
-<%= button_to "Delete course", @course, :method => :delete %>
+<%= button_to "Delete course", @course, method: :delete, class: "btn" %>

@@ -1,10 +1,10 @@
 <h1>Edit profile</h1>
 
 <%= form_for(@user) do |f| %>
-<%= render 'shared/error_messages', :object => f.object %>
-<%= render 'fields', :f => f %>
+<%= render 'shared/error_messages', object: f.object %>
+<%= render 'fields', f: f %>
   <div class="actions">
     <%= f.submit "Apply" %>
   </div>
 <% end %>
-<%= button_to "Delete my profile", @user, :method => :delete %>
+<%= button_to "Delete my profile", @user, method: :delete %>

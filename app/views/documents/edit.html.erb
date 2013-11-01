@@ -1,9 +1,9 @@
 <h1>Edit document</h1>
 
-<%= form_for @document, :url => documents_path, :html => { :multipart => true } do |f| %>
-<%= render 'fields', :f => f %>
+<%= form_for @document, url: documents_path, html: { multipart: true } do |f| %>
+<%= render 'fields', f: f %>
   <div class="actions">
-    <%= f.submit "Apply" %>
+    <%= f.submit "Apply", class: "btn btn-primary" %>
   </div>
 <% end %>
-<%= button_to "Delete document", @document, :method => :delete %>
+<%= button_to "Delete document", @document, method: :delete, class: "btn" %>

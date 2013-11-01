@@ -3,14 +3,19 @@
   <dt>Signup date</dt>
   <dd><%= @user.created_at %></dd>
 </dl>
-<table>
-  <tr><th>Title</th><th>Desc</th><th>Course</th><th>Created at</th></tr>
-<% @user.documents.each do |document| %>
-  <tr>
-    <td><%= link_to document.title, document %></td>
-    <td><%= document.desc %></td>
-    <td><%= link_to document.course.code, document.course if document.course%></td>
-    <td><%= document.created_at %></td>
-  </tr>
+<% if @user.documents.any? %>
+  <h2>Documents</h2>
+  <table class="document table table-striped">
+    <tr><th>Title</th><th>Desc</th><th>Course</th><th>Created at</th></tr>
+  <% @user.documents.each do |document| %>
+    <tr>
+      <td><%= link_to document.title, document %></td>
+      <td><%= document.desc %></td>
+      <td><%= link_to document.course.code, document.course if document.course%></td>
+      <td><%= document.created_at %></td>
+    </tr>
+  <% end %>
+  </table>
+<% else %>
+  <h2>No document yet</h2>
 <% end %>
-</table>

@@ -7,6 +7,6 @@ class CreateCourses < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :courses, :code, :unique => true
+    add_index :courses, :code, unique: true
   end
 end

@@ -17,5 +17,5 @@
   <dt>Not associated to any user</dt>
 <% end %>
 </dl>
-<%= link_to "Download", @document.docfile.url, :class => "btn btn-primary", :target => "_blank" %>
-<%= link_to "Edit", edit_document_path(@document), :class => "btn" %>
+<%= link_to "Download", @document.docfile.url, class: "btn btn-primary", target: "_blank" %>
+<%= link_to "Edit", edit_document_path(@document), class: "btn" %>

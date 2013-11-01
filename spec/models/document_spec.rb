@@ -4,7 +4,7 @@ describe Document do
   before :each do
     @user = FactoryGirl.create(:user)
     @course = FactoryGirl.create(:course)
-    @attr = { :title => "Document title", :desc => "Document desc", :user_id => @user.id, :course_id => @course.id }
+    @attr = { title: "Document title", desc: "Document desc", user_id: @user.id, course_id: @course.id }
     @doc = FactoryGirl.create(:document)
   end
 
@@ -38,7 +38,7 @@ describe Document do
   describe "validations" do
     describe "should fail if" do
       it "no user associated" do
-        @document = Document.new(@attr.merge({ :user_id => nil }))
+        @document = Document.new(@attr.merge({ user_id: nil }))
         @document.should_not be_valid
       end
 

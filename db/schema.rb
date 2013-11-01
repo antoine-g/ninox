@@ -11,22 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130928100517) do
+ActiveRecord::Schema.define(version: 20130928100517) do
 
-  create_table "courses", :force => true do |t|
+  create_table "courses", force: true do |t|
     t.string   "name"
     t.string   "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "courses", ["code"], :name => "index_courses_on_code", :unique => true
+  add_index "courses", ["code"], name: "index_courses_on_code", unique: true
 
-  create_table "documents", :force => true do |t|
+  create_table "documents", force: true do |t|
     t.string   "title"
     t.string   "desc"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.integer  "course_id"
     t.integer  "user_id"
     t.string   "docfile_file_name"
@@ -35,15 +35,15 @@ ActiveRecord::Schema.define(:version => 20130928100517) do
     t.datetime "docfile_updated_at"
   end
 
-  create_table "users", :force => true do |t|
+  create_table "users", force: true do |t|
     t.string   "email"
     t.string   "password_hash"
     t.string   "salt"
     t.boolean  "admin"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

@@ -9,7 +9,7 @@ Ninox::Application.routes.draw do
 
   get "pages/about"
 
-  root :to => "pages#home"
+  root to: "pages#home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -19,8 +19,8 @@ Ninox::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
 
   # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  #   match 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  # This route can be invoked with purchase_url(id: product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
@@ -47,7 +47,7 @@ Ninox::Application.routes.draw do
   #   resources :products do
   #     resources :comments
   #     resources :sales do
-  #       get 'recent', :on => :collection
+  #       get 'recent', on: :collection
   #     end
   #   end
 
@@ -60,7 +60,7 @@ Ninox::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  # root to: 'welcome#index'
 
   # See how all your routes lay out with "rake routes"
 
