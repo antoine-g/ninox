@@ -42,8 +42,8 @@ describe Document do
         @document.should_not be_valid
       end
 
-      it "no docfile associated" do
-        @document = Document.new(@attr)
+      it "no title associated" do
+        @document = Document.new(@attr.merge({ :title => nil }))
         @document.should_not be_valid
       end
     end

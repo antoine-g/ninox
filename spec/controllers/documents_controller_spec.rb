@@ -83,7 +83,7 @@ describe DocumentsController do
 
     it "should redirect to the document page" do
       post :create, :document => @attr
-      response.should redirect_to(document_path(assigns(:document)))
+      response.should redirect_to(document_path(assigns[:document]))
     end
   end
 

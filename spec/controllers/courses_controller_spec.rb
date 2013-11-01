@@ -8,7 +8,7 @@ describe CoursesController do
       @course = FactoryGirl.create(:course)
 
       @courses = [@course]
-      30.times do
+      26.times do
         @courses << FactoryGirl.create(:course, :code => FactoryGirl.generate(:code))
       end
     end
@@ -24,9 +24,10 @@ describe CoursesController do
     end
 
     it "should have 1 element for each user" do
+
       get :index
-      @courses.each do |course|
-        response.should have_selector("td", :content => course.code)
+      @courses[0..24].each do |course|
+        response.should have_selector("a", :href => course_path(course), :content => course.code)
       end
     end
     

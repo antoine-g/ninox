@@ -174,12 +174,8 @@ describe UsersController do
 
   describe "GET 'index'" do
     before(:each) do
-      @user = FactoryGirl.create(:user)
-      second = FactoryGirl.create(:user, :email => "another@example.com")
-      third  = FactoryGirl.create(:user, :email => "another@example.net")
-
-      @users = [@user, second, third]
-      30.times do
+      @users = []
+      26.times do
         @users << FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
       end
     end
@@ -196,8 +192,8 @@ describe UsersController do
 
     it "should have 1 element for each user" do
       get :index
-      @users.each do |user|
-        response.should have_selector("td", :content => user.email)
+      @users[0..24].each do |user|
+        response.should have_selector("a", :href => user_path(user), :content => user.email)
       end
     end
     
