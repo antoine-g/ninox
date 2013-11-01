@@ -11,6 +11,9 @@ describe CoursesController do
       26.times do
         @courses << FactoryGirl.create(:course, :code => FactoryGirl.generate(:code))
       end
+      @courses.sort do |a,b|
+        a.code <=> b.code
+      end
     end
 
     it "should return http success" do

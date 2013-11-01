@@ -4,11 +4,11 @@
   <dd><%= @document.title %></dd>
   <dt>Description</dt>
   <dd><%= @document.desc %></dd>
-<% if @document.course %>
   <dt>Associated to course</dt>
+<% if @document.course %>
   <dd><%= link_to @document.course.code, @document.course %></dd>
 <% else %>
-  <dt>Not associated to any course</dt>
+  <dd>None</dd>
 <% end %>
 <% if @document.user %>
   <dt>Owner</dt>
@@ -17,3 +17,4 @@
   <dt>Not associated to any user</dt>
 <% end %>
 </dl>
+<%= link_to "Edit", edit_document_path(@document), :class => "btn" %>

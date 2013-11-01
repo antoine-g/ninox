@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  attr_accessible :desc, :title, :course_id, :user_id
+  attr_accessible :desc, :title, :course_id, :user_id, :docfile
   belongs_to :course
   belongs_to :user
   has_attached_file :docfile

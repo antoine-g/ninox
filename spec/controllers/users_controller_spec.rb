@@ -178,6 +178,9 @@ describe UsersController do
       26.times do
         @users << FactoryGirl.create(:user, :email => FactoryGirl.generate(:email))
       end
+      @users.sort do |a,b|
+        a.email <=> b.email
+      end
     end
 
     it "should return http success" do

@@ -9,7 +9,7 @@
   <tr>
     <td><%= link_to document.title, document %></td>
     <td><%= document.desc %></td>
-    <td><%= link_to document.course.code, document.course %></td>
+    <td><%= link_to document.course.code, document.course if document.course%></td>
     <td><%= document.created_at %></td>
   </tr>
 <% end %>

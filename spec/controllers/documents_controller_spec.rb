@@ -4,14 +4,15 @@ describe DocumentsController do
   render_views
   before(:each) do
     @attr = { :title => "Doc title", :desc => "Description of the document",
-              :docfile => fixture_file_upload('/testdoc.txt', 'text/txt')}
+              :docfile => fixture_file_upload('/testdoc.txt', 'text/txt'),
+              :user_id => FactoryGirl.create(:user)}
     @document = FactoryGirl.create(:document)
   end
 
   describe "GET 'index'" do
     before(:each) do
       @documents = [@document]
-      30.times do
+      25.times do
         @documents << FactoryGirl.create(:document)
       end
     end
@@ -71,10 +72,6 @@ describe DocumentsController do
   end
 
   describe "POST 'create'" do
-    before(:each) do
-        @attr = { :title => "Doc title", :desc => "Description" }
-    end
-
     it "should create 1 document" do
       lambda do
         post :create, :document => @attr
@@ -100,10 +97,6 @@ describe DocumentsController do
   end
 
   describe "PUT 'update'" do
-    before(:each) do
-      @attr = { :title => "Doc title", :desc => "Description" }
-    end
-
     it "should alter document characteristics" do
       put :update, :id => @document.id, :document => @attr
       @document.reload
