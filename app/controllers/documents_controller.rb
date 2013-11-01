@@ -26,7 +26,7 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-    @document   = Document.find(params[:id])
+    @document = Document.find(params[:id])
     @title = "Edit document"
   end
 

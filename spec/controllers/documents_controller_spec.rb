@@ -2,13 +2,17 @@ require 'spec_helper'
 
 describe DocumentsController do
   render_views
+  before(:each) do
+    @attr = { :title => "Doc title", :desc => "Description of the document",
+              :docfile => fixture_file_upload('/testdoc.txt', 'text/txt'),
+              :user_id => FactoryGirl.create(:user)}
+    @document = FactoryGirl.create(:document)
+  end
 
   describe "GET 'index'" do
     before(:each) do
-      @document = FactoryGirl.create(:document)
-
       @documents = [@document]
-      30.times do
+      25.times do
         @documents << FactoryGirl.create(:document)
       end
     end
@@ -39,22 +43,18 @@ describe DocumentsController do
   end
 
   describe "GET 'show'" do
-    before(:each) do
-      @document = FactoryGirl.create(:document)
-    end
-
     it "should return http success" do
-      get 'show', :id => @document
+      get 'show', :id => @document.id
       response.should be_success
     end
 
     it "should have the right title" do
-      get 'show', :id => @document
+      get 'show', :id => @document.id
       response.should have_selector("title", :content => "#{@app_name} | #{@title}")
     end
 
     it "should display the right document" do
-      get :show, :id => @document
+      get :show, :id => @document.id
       assigns(:document).should == @document
     end
   end
@@ -72,10 +72,6 @@ describe DocumentsController do
   end
 
   describe "POST 'create'" do
-    before(:each) do
-        @attr = { :title => "Doc title", :desc => "Description" }
-    end
-
     it "should create 1 document" do
       lambda do
         post :create, :document => @attr
@@ -84,67 +80,54 @@ describe DocumentsController do
 
     it "should redirect to the document page" do
       post :create, :document => @attr
-      response.should redirect_to(document_path(assigns(:document)))
+      response.should redirect_to(document_path(assigns[:document]))
     end
   end
 
   describe "GET 'edit'" do
-    before(:each) do
-      @document = FactoryGirl.create(:document)
-    end
-
     it "should return http success" do
-      get :edit, :id => @document
+      get :edit, :id => @document.id
       response.should be_success
     end
 
     it "should have the right title" do
-      get :edit, :id => @document
+      get :edit, :id => @document.id
       response.should have_selector("title", :content => "#{@app_name} | #{@title}")
     end
   end
 
   describe "PUT 'update'" do
-    before(:each) do
-      @document = FactoryGirl.create(:document)
-      @attr = { :title => "Doc title", :desc => "Description" }
-    end
-
     it "should alter document characteristics" do
-      put :update, :id => @document, :document => @attr
+      put :update, :id => @document.id, :document => @attr
       @document.reload
       @document.title.should == @attr[:title]
     end
 
     it "should redirect to the document page" do
-      put :update, :id => @document, :document => @attr
+      put :update, :id => @document.id, :document => @attr
       response.should redirect_to(document_path(@document))
     end
 
     it "should display a flash message" do
-      put :update, :id => @document, :document => @attr
+      put :update, :id => @document.id, :document => @attr
       flash[:success].should =~ /Document updated/
     end
   end
 
   describe "DELETE 'destroy'" do
-    before(:each) do
-      @document = FactoryGirl.create(:document)
-    end
-
     it "should destroy 1 document" do
       lambda do
-        delete :destroy, :id => @document
+        delete :destroy, :id => @document.id
       end.should change(Document, :count).by(-1)
     end
 
     it "should redirect to documents index" do
-      delete :destroy, :id => @document
+      delete :destroy, :id => @document.id
       response.should redirect_to(documents_path)
     end
 
     it "should display a flash message'" do
-      delete :destroy, :id => @document
+      delete :destroy, :id => @document.id
       flash[:success].should =~ /Document deleted/i
     end
   end

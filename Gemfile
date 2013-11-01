@@ -7,6 +7,7 @@ gem 'rails', '3.2.14'
 
 gem 'sqlite3'
 gem "kaminari", "~> 0.14.1"
+gem "paperclip", "~> 3.5.1"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -29,6 +30,7 @@ group :test do
   gem "factory_girl_rails", "~> 4.2.1"
   gem "webrat", "~> 0.7.3"
   gem "spork-rails", "~> 4.0.0"
+  gem "database_cleaner", "~> 1.2.0"
 end
 
 gem 'jquery-rails'
