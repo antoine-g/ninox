@@ -20,3 +20,8 @@
 <% else %>
   <h2>No document yet</h2>
 <% end %>
+<% if user_signed_in? %>
+  <%= link_to "Upload a document", new_document_path(params: {document: {course_id: @course.id}}), class: "btn btn-primary btn-large" %>
+<% else %>
+  <p>Please <%= link_to "sign in", new_user_session_path %> to upload a document.</p>
+<% end %>

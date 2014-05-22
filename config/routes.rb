@@ -5,7 +5,7 @@ Ninox::Application.routes.draw do
 
   resources :courses
 
-  #resources :users
+  resources :users
 
   get "pages/home"
 
