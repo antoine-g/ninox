@@ -1,6 +1,7 @@
 class AddDeviseToUsers < ActiveRecord::Migration
   def self.up
     # Cleanup unused columns
+    remove_column :users, :email
     remove_column :users, :salt
     remove_column :users, :last_login_at
     remove_column :users, :login_count
