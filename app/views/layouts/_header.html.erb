@@ -4,7 +4,7 @@
       <ul class="nav">
         <li><%= link_to "Home", { controller: "/pages", action: "home" } %></li>
         <li><%= link_to "Courses", courses_path %></li>
-        <li><a href="#">Most downloaded</a></li>
+        <li><%= link_to "Most viewed", { controller: "/documents", action: "most_viewed" } %></li>
       </ul>
       <ul class="pull-right">
         <% if user_signed_in? %>

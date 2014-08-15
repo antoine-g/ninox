@@ -61,6 +61,11 @@ class DocumentsController < ApplicationController
     redirect_to documents_path
   end
 
+  def most_viewed
+    @title = "Most viewed"
+    @documents = Document.order("unique_views DESC").page(params[:page])
+  end
+
   private
     def course_exists?(course_id)
       (not Course.find_by_id(course_id).nil?) or course_id.nil?
