@@ -8,5 +8,10 @@
   </tr>
   <%= render @courses %>
 </table>
+<% if user_signed_in? %>
+  <%= link_to "Add a new course", new_course_path, class: "btn btn-primary" %>
+<% else %>
+  <p>Please <%= link_to "sign in", new_user_session_path %> to add a new course.</p>
+<% end %>
 
 <%= paginate @courses %>

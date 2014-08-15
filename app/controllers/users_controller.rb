@@ -28,11 +28,17 @@ class UsersController < ApplicationController
 
   def edit
     @user  = User.find(params[:id])
+    if (@user != current_user)
+      redirect_to root_path, alert: "Access denied"
+    end
     @title = "Edit profile"
   end
 
   def update
     @user = User.find(params[:id])
+    if (@user != current_user)
+      redirect_to root_path, alert: "Forbidden operation"
+    end
     if @user.update_attributes(params[:user])
       flash[:success] = "Profile updated"
       redirect_to @user
@@ -44,7 +50,11 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @user = User.find(params[:id])
+    if (@user != current_user)
+      redirect_to root_path, alert: "Forbidden operation"
+    end
+    @user.destroy
     flash[:success] = "Profile deleted"
     redirect_to users_path
     # TODO : reserved to admin and self deletion
