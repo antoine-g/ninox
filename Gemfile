@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem "kaminari", "~> 0.14.1"
 gem "paperclip", "~> 3.5.1"
 gem "devise"
+gem "impressionist"
 
 # Gems used only for assets and not required
 # in production environments by default.

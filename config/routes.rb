@@ -1,6 +1,7 @@
 Ninox::Application.routes.draw do
   devise_for :users
 
+  get '/documents/most_viewed', to: 'documents#most_viewed'
   resources :documents
 
   resources :courses

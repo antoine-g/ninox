@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
+  impressionist :actions=>[:show]
 
   def index
     @title = "List of documents"
@@ -58,6 +59,11 @@ class DocumentsController < ApplicationController
     @document.destroy
     flash[:success] = "Document deleted"
     redirect_to documents_path
+  end
+
+  def most_viewed
+    @title = "Most viewed"
+    @documents = Document.order("unique_views DESC").page(params[:page])
   end
 
   private

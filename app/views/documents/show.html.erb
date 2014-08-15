@@ -16,6 +16,8 @@
 <% else %>
   <dt>Not associated to any user</dt>
 <% end %>
+  <dt>Views</dt>
+  <dd><%= @document.unique_views %></dd>
 </dl>
 <%= link_to "Download", @document.docfile.url, class: "btn btn-primary", target: "_blank" %>
 <% if @document.user == current_user %>

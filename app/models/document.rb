@@ -1,5 +1,5 @@
 class Document < ActiveRecord::Base
-  attr_accessible :desc, :title, :course_id, :user_id, :docfile
+  attr_accessible :desc, :title, :course_id, :user_id, :docfile, :unique_views
   belongs_to :course
   belongs_to :user
   has_attached_file :docfile,
@@ -8,4 +8,6 @@ class Document < ActiveRecord::Base
 
   validates_presence_of :user
   validates_presence_of :title
+
+  is_impressionable :column_name => :unique_views, :unique => :session_hash, :counter_cache => true
 end
