@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
   before_filter :authenticate_user!, except: [:index, :show]
+  impressionist :actions=>[:show]
 
   def index
     @title = "List of documents"
