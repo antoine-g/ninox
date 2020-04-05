@@ -52,5 +52,7 @@ module Ninox
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.action_controller.per_form_csrf_tokens = true
   end
 end
