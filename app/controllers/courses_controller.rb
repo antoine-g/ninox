@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   
   def index
     @title = "List of courses"
@@ -17,7 +17,7 @@ class CoursesController < ApplicationController
   end
 
   def create
-    @course = Course.new(params[:course])
+    @course = Course.create(course_params)
     if @course.save
       flash[:success] = "Course created"
       redirect_to course_path(@course)
@@ -34,7 +34,7 @@ class CoursesController < ApplicationController
 
   def update
     @course = Course.find(params[:id])
-    if @course.update_attributes(params[:course])
+    if @course.update(course_params)
       flash[:success] = "Course updated"
       redirect_to @course
     else
@@ -48,4 +48,10 @@ class CoursesController < ApplicationController
     flash[:success] = "Course deleted"
     redirect_to courses_path
   end
+
+  private
+    def course_params
+      params.require(:course).permit(:code, :name)
+    end
+
 end

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,76 +10,73 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200405171100) do
+ActiveRecord::Schema.define(version: 2020_04_05_171100) do
 
   create_table "courses", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
+    t.string "name"
+    t.string "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["code"], name: "index_courses_on_code", unique: true
   end
 
-  add_index "courses", ["code"], name: "index_courses_on_code", unique: true
-
   create_table "documents", force: :cascade do |t|
-    t.string   "title"
-    t.string   "desc"
+    t.string "title"
+    t.string "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "course_id"
-    t.integer  "user_id"
-    t.string   "docfile_file_name"
-    t.string   "docfile_content_type"
-    t.integer  "docfile_file_size"
+    t.integer "course_id"
+    t.integer "user_id"
+    t.string "docfile_file_name"
+    t.string "docfile_content_type"
+    t.integer "docfile_file_size"
     t.datetime "docfile_updated_at"
-    t.integer  "unique_views",         default: 0
+    t.integer "unique_views", default: 0
   end
 
   create_table "impressions", force: :cascade do |t|
-    t.string   "impressionable_type"
-    t.integer  "impressionable_id"
-    t.integer  "user_id"
-    t.string   "controller_name"
-    t.string   "action_name"
-    t.string   "view_name"
-    t.string   "request_hash"
-    t.string   "ip_address"
-    t.string   "session_hash"
-    t.text     "message"
-    t.text     "referrer"
+    t.string "impressionable_type"
+    t.integer "impressionable_id"
+    t.integer "user_id"
+    t.string "controller_name"
+    t.string "action_name"
+    t.string "view_name"
+    t.string "request_hash"
+    t.string "ip_address"
+    t.string "session_hash"
+    t.text "message"
+    t.text "referrer"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "params"
+    t.text "params"
+    t.index ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
+    t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
+    t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
+    t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
+    t.index ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
+    t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
+    t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
+    t.index ["user_id"], name: "index_impressions_on_user_id"
   end
-
-  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index"
-  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index"
-  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "params"], name: "poly_params_request_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index"
-  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
-  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
-  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "password_hash"
+    t.string "password_hash"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role",                   default: "user", null: false
-    t.string   "email",                  default: "",     null: false
-    t.string   "encrypted_password",     default: "",     null: false
-    t.string   "reset_password_token"
+    t.string "role", default: "user", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,      null: false
+    t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
