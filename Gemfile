@@ -7,10 +7,10 @@ gem 'rails', '6.0.3.1'
 
 gem 'sqlite3', "~> 1.4"
 gem "kaminari"
-gem "paperclip", "~> 3.5.1"
+gem "paperclip"
 gem "devise"
 gem "impressionist"
-gem "bigdecimal", "~> 1.4"
+gem "bigdecimal"
 gem 'bootsnap'
 
 # Gems used only for assets and not required
@@ -31,10 +31,10 @@ group :developpement do
 end
 
 group :test do
-  gem "rspec", "~> 2.14.1"
-  gem "factory_girl_rails", "~> 4.2.1"
-  gem "webrat", "~> 0.7.3"
-  gem "database_cleaner", "~> 1.2.0"
+  gem "rspec"
+  gem "factory_girl_rails"
+  gem "webrat"
+  gem "database_cleaner"
   gem 'rails-controller-testing'
 end
 
