@@ -17,7 +17,7 @@ describe CoursesController do
     end
 
     it "should return http success" do
-      get 'index'
+      get :index
       response.should be_success
     end
 
@@ -48,12 +48,12 @@ describe CoursesController do
     end
 
     it "should return http success" do
-      get 'show', id: @course
+      get :show, id: @course
       response.should be_success
     end
 
     it "should have the right title" do
-      get 'show', id: @course
+      get :show, id: @course
       response.should have_selector("title", content: "#{@app_name} | #{@title}")
     end
 
@@ -65,12 +65,12 @@ describe CoursesController do
 
   describe "GET 'new'" do
     it "should return http success" do
-      get 'new'
+      get :new
       response.should be_success
     end
 
     it "should have the right title" do
-      get 'new'
+      get :new
       response.should have_selector("title", content: "#{@app_name} | #{@title}")
     end
   end

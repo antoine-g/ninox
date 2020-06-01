@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.create(usre_params)
     if @user.save
       # TODO signin
       flash[:success] = "Welcome to Ninox!"
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
     if (@user != current_user)
       redirect_to root_path, alert: "Forbidden operation"
     end
-    if @user.update_attributes(params[:user])
+    if @user.update(user_params)
       flash[:success] = "Profile updated"
       redirect_to @user
     else
@@ -59,4 +59,10 @@ class UsersController < ApplicationController
     redirect_to users_path
     # TODO : reserved to admin and self deletion
   end
+
+  private
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :remember_me)
+    end
+
 end

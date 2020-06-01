@@ -12,3 +12,7 @@
  *= require_tree .
  *= require_tree ../../../vendor/assets/bootstrap/css
  */
+
+ ul#sign-in-buttons > form {
+    display: inline;
+ }

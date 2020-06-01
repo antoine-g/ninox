@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  code: MyString
+  name: CourseName1
+  code: AA01
 
 two:
-  name: MyString
-  code: MyString
+  name: CourseName2
+  code: AA02

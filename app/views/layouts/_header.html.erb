@@ -6,7 +6,7 @@
         <li><%= link_to "Courses", courses_path %></li>
         <li><%= link_to "Most viewed", { controller: "/documents", action: "most_viewed" } %></li>
       </ul>
-      <ul class="pull-right">
+      <ul class="pull-right" id="sign-in-buttons">
         <% if user_signed_in? %>
           Signed in as <%= current_user.email %>
           <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
